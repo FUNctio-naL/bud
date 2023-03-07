@@ -1,0 +1,74 @@
+{% extends 'main.html' %} 
+{% load static %}
+{% block content %} 
+
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="settings layout__body">
+        <div class="settings__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{% static 'images/avatar.svg' %}" id="preview-avatar" />
+          </div>
+        </div>
+        <form class="form" method="POST" action="">
+          {% csrf_token %}
+          <div class="form__group form__avatar">
+            <label for="avatar">Upload Avatar</label>
+            <input
+              class="form__hide"
+              required
+              type="file"
+              name="avatar"
+              id="avatar"
+              accept="image/png, image/gif, image/jpeg"
+            />
+          </div>
+          <div class="form__group">
+            <label for="name">Full Name</label>
+            <input
+              id="fullname"
+              name="fullname"
+              type="text"
+              placeholder="e.g. Max Verstappen"
+              value="{{user.username}}"
+            />
+          </div>
+          <div class="form__group">
+            <label for="username">Username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="e.g. @max_versatppen"
+              value="{{user.username}}"
+            />
+          </div>
+          <div class="form__group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="e.g. max@domain.com"
+            />
+          </div>
+          <div class="form__group">
+            <label for="about">About</label>
+            <textarea
+              name="about"
+              id="about"
+              placeholder="Write about yourself..."
+            ></textarea>
+          </div>
+          <div class="form__action">
+            <a class="btn btn--dark" href="{% url 'user-profile' user.id %}">Cancel</a>
+            <button class="btn btn--main" type="submit">Update </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
